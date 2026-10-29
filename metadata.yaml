@@ -1,15 +1,15 @@
 name: astrbot_plugin_sticker_memory
 display_name: 表情包记忆
-short_desc: 让 Bot 知道自己有一柜子收藏表情，并主动挑着发
+short_desc: 让 Bot 知道自己有一柜子收藏表情，会挑着发、会记备注
 desc: |-
   把 QQ 账号里的「收藏表情」变成 Bot 自己的能力，而不是靠系统塞给她。
 
   · 自动同步 QQ 收藏表情库（emoji_id / 图片地址 / 备注）
   · 注入「你有一柜子表情」的自我认知，模型知道可以主动发
   · 三个工具：sticker_list 看库、sticker_send 发一个、sticker_note 写备注
-  · 备注/使用次数持久化，越用越知道自己哪张表情适合什么场合
-  · 只在有需要时发，冷却时间防止刷屏
-
+  · 自动收藏：群里别人发的图可按概率收进自己的表情库（带开关、每日上限、群白名单）
+  · 视觉打标：让视觉模型看图，自动写「画面｜场合｜标签」进备注
+  · WebUI 面板：插件页里的「表情包库」，可预览、改描述、改标签、单张打标、删除
 version: 1.0.0
 author: ChiMeng
 astrbot_version: ">=4.20.0"
