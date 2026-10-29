@@ -1,0 +1,107 @@
+{
+  "enable": {
+    "description": "启用表情包记忆",
+    "type": "bool",
+    "default": true,
+    "hint": "总开关。关掉后不再注入认知、工具也不可用。"
+  },
+  "inject_awareness": {
+    "description": "让她知道自己有表情库",
+    "type": "bool",
+    "default": true,
+    "hint": "每次请求前注入一小段提示：你有 N 个收藏表情、可以主动发、别滥用。关掉的话她只会在你要求时才用工具。"
+  },
+  "max_in_prompt": {
+    "description": "提示里最多列几个表情",
+    "type": "int",
+    "default": 8,
+    "hint": "只列有备注或常用的那几个，避免占满上下文。"
+  },
+  "auto_sync": {
+    "description": "自动同步收藏表情",
+    "type": "bool",
+    "default": true,
+    "hint": "按下面的 TTL 自动从 QQ 拉取一次收藏表情列表。"
+  },
+  "sync_ttl_minutes": {
+    "description": "同步间隔（分钟）",
+    "type": "int",
+    "default": 60,
+    "hint": "太短会增加网关压力，太长则新收藏的表情要等一会才能用。"
+  },
+  "send_cooldown_seconds": {
+    "description": "表情发送冷却（秒）",
+    "type": "int",
+    "default": 20,
+    "hint": "同一会话内两次发表情的间隔，防止连着刷。"
+  },
+  "send_probability": {
+    "description": "发送表情的概率",
+    "type": "float",
+    "default": 0.4,
+    "hint": "她想发表情时，只有这个概率会真的发出去。0 = 从不主动发（只能手动），1 = 想发就发。建议 0.3~0.5。"
+  },
+  "download_timeout": {
+    "description": "下载表情超时（秒）",
+    "type": "int",
+    "default": 12,
+    "hint": "从 QQ CDN 拉图片的超时。超时会退化成直接发链接。"
+  },
+  "auto_collect_enable": {
+    "description": "自动收藏别人的表情",
+    "type": "bool",
+    "default": false,
+    "hint": "开着时，群里/私聊别人发的图片会按概率收进这个 QQ 号的收藏表情。用的是 add_custom_face，会真的写进 QQ 收藏。"
+  },
+  "auto_collect_probability": {
+    "description": "自动收藏的概率",
+    "type": "float",
+    "default": 0.15,
+    "hint": "每张别人发的图有这么大机会被收藏。0.15 比较克制，0.5 就很积极了。"
+  },
+  "auto_collect_daily_max": {
+    "description": "每天最多自动收藏几个",
+    "type": "int",
+    "default": 10,
+    "hint": "0 = 不限（不推荐）。QQ 收藏有上限，别塞爆。"
+  },
+  "auto_collect_groups": {
+    "description": "只在这些群自动收藏（群号）",
+    "type": "list",
+    "items": {
+      "type": "string"
+    },
+    "default": [],
+    "hint": "留空 = 所有群。填群号可限定范围。"
+  },
+  "auto_collect_private": {
+    "description": "私聊也自动收藏",
+    "type": "bool",
+    "default": true,
+    "hint": "关掉则只在群里收。"
+  },
+  "auto_tag_enable": {
+    "description": "收藏后自动打标",
+    "type": "bool",
+    "default": true,
+    "hint": "新收藏的表情自动让视觉模型写一句描述，方便以后按语境挑。"
+  },
+  "tag_provider_id": {
+    "description": "打标用的视觉模型",
+    "type": "string",
+    "default": "",
+    "hint": "留空 = 用当前默认模型。需要支持图片输入，比如 deepseek/deepseek-flash。"
+  },
+  "tag_prompt": {
+    "description": "打标提示词",
+    "type": "text",
+    "default": "这是 QQ 收藏表情包的一张图。用中文回答，只输出一行，格式：画面描述|适合场合|标签1/标签2/标签3。画面描述不超过 15 字，说清图里是什么、什么表情；适合场合不超过 15 字；标签 2~3 个，每个 2~4 个字。不要客套、不要解释、不要换行。",
+    "hint": "要求模型输出「画面|场合|标签」，插件会拆开存进备注和标签。"
+  },
+  "tag_timeout": {
+    "description": "单张打标超时（秒）",
+    "type": "int",
+    "default": 60,
+    "hint": "视觉模型看图偶尔慢，60 秒够用。"
+  }
+}
